@@ -1,0 +1,46 @@
+package com.company;
+
+
+
+import static com.company.arrayvaluehighfact.scan;
+
+public class overriding {
+    public static int rec(String s1,String s2){
+        int count=0;
+        for(int i=0;i<s2.length();i++){
+            int sam=0;
+            for(int j=0;j<s1.length();j++){
+                if(s2.charAt(i)==s1.charAt(j)){
+                    sam=1;
+                }
+            }
+            if(sam==1)
+                count++;
+        }
+        return count==s2.length()?1:0;
+    }
+    public static void main(String []args){
+        int m=scan.nextInt(),n=scan.nextInt();
+        String s1[]=new String[m];
+        String s2[]=new String[n];
+        for(int i=0;i<m;i++) {
+            s1[i] = scan.next();
+        }
+        for(int i=0;i<n;i++) {
+            s2[i] = scan.next();
+        }
+        int c=0;
+        String sam="";
+        for(int i=0;i<m;i++){
+            int count=0;
+            for(int j=0;j<n;j++){
+                count+=rec(s1[i],s2[j]);
+            }
+            if(count==s2.length) {
+                c++;
+                sam+=s1[i]+" , ";
+            }
+        }
+        System.out.println(c+ " ("+sam+")");
+    }
+}
