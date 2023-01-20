@@ -1,0 +1,47 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
+
+public class qq2 {
+    public static void rec(int i,int n,int sum,int []a,List<List<Integer>> list1,ArrayList<Integer> list2,List<Integer> ls){
+        if(!list1.contains(ls) && ls.size()>1)
+        {
+            list1.add(new ArrayList<>(ls));
+            list2.add(sum);
+        }
+        if(i==n)
+            return;
+        for(int j=i;j<n;j++){
+            ls.add(a[j]);
+            rec(j+1,n,sum+a[j],a,list1,list2,ls);
+            ls.clear();
+            sum=0;
+        }
+    }
+    public static void main(String []args){
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=scan.nextInt();
+        }
+        List<List<Integer>> list1=new ArrayList<>();
+        ArrayList<Integer> list2=new ArrayList<>();
+        rec(0,n,0,a,list1,list2,new ArrayList<>());
+        String sam="";
+        int sum=0;
+        for(int i=0;i<list1.size();i++){
+            for(int j=i+1;j<list1.size();j++){
+                if(Objects.equals(list2.get(i), list2.get(j))){
+                    int in=list1.get(i).size()-1;
+                    if(in+1<n && a[in+1]==list1.get(j).get(0)){
+                        System.out.println(list1.get(i)+" "+list1.get(j));
+                    }
+                }
+            }
+        }
+    }
+}
